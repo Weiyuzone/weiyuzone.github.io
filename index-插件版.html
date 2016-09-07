@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            float: left;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+    </style>
+    <script src="jquery-1.12.2.js"></script>
+    <script src="masonry-docs.min.js"></script>
+    <script>
+
+        $(function () {
+            var $container = $('#container');
+            $container.imagesLoaded(function () {
+                $container.masonry({
+                    itemSelector: '.box',
+                    isAnimated: true
+                });
+            });
+
+
+            var json = [
+                {src: "images/P_000.jpg"},
+                {src: "images/P_001.jpg"},
+                {src: "images/P_002.jpg"},
+                {src: "images/P_003.jpg"},
+                {src: "images/P_004.jpg"},
+                {src: "images/P_005.jpg"},
+                {src: "images/P_006.jpg"},
+                {src: "images/P_007.jpg"},
+                {src: "images/P_008.jpg"},
+                {src: "images/P_009.jpg"},
+            ];
+            //判断触底，加载更多的图片
+            $(window).scroll(function () {
+                //当距离底部就剩下500px的时候，加载新图片
+                if ($(document).height() - $(this).scrollTop() - $(this).height() < 500) {
+                    //创建一个jquery对象
+                    var str = "";
+                    for (var i = 0; i < json.length; i++) {
+                        str += '<div class="box"><img src="' + json[i].src + '" alt=""/></div>';
+                    }
+                    var $boxes = $(str);
+                    $container.append($boxes).masonry("appended", $boxes, true);//追加元素
+                    $container.imagesLoaded(function () {
+                        $container.masonry();
+                    });//加载完图片后，会实现自动重新排列。【这里是重点】
+                }
+            });
+
+        });
+
+
+    </script>
+</head>
+<body>
+<div id="container">
+    <div class="box"><img src="images/P_000.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_001.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_002.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_003.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_004.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_005.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_006.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_007.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_008.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_009.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_000.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_001.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_002.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_003.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_004.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_005.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_006.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_007.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_008.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_009.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_000.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_001.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_002.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_003.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_004.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_005.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_006.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_007.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_008.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_009.jpg" alt=""/></div>
+</div>
+</body>
+</html>
